@@ -52,7 +52,7 @@ Lets say, we have a static site front eded with Cloudfront and we want to use La
 
     Open the cloudfront url in the browser and check out the developer settings(F12 in chrome). As shown in the screenshot below, there will be a header `Custom-Lambda-Headers: Mystique-Added`, You can add any header for security.
 
-    ![CloudFront Lambda@Edge](images/custom-lambda-headers-miztiik.png)
+    ![CloudFront Lambda@Edge](images/custom-lambda-headers-miztiik-1.png)
 
 1. ## Troubleshooting: Lambda@Edge Logs
 

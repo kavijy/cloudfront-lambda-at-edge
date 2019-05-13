@@ -13,7 +13,7 @@ Lets say, we have to create thumbnails, profile picture for the images uploaded 
 1. ## Clone the repository
 
    ```bash
-   git clone https://github.com/miztiik/serverless-thumbnails-creator.git
+   git clone https://github.com/miztiik/cloudfront-lambda-at-edge.git
    ```
 
 1. ## Customize the deployment
@@ -25,10 +25,10 @@ Lets say, we have to create thumbnails, profile picture for the images uploaded 
     ```bash
     AWS_PROFILE="default"
     AWS_REGION="us-east-1"
-    BUCKET_NAME="YOUR-BUCKET-NAME-GOES-HERE" # bucket must exist in the SAME region the deployment is taking place
-    SERVICE_NAME="serverless-thumbnails-creator"
-    TEMPLATE_NAME="${SERVICE_NAME}.yaml"
-    STACK_NAME="${SERVICE_NAME}"
+    BUCKET_NAME="sam-templates-011" # bucket must exist in the SAME region the deployment is taking place
+    SERVICE_NAME="cloudfront-lambda-at-edge"
+    TEMPLATE_NAME="${SERVICE_NAME}.yaml" # The CF Template should be the same name, If not update it.
+    STACK_NAME="${SERVICE_NAME}-001"
     OUTPUT_DIR="./outputs/"
     PACKAGED_OUTPUT_TEMPLATE="${OUTPUT_DIR}${STACK_NAME}-packaged-template.yaml"
     ```

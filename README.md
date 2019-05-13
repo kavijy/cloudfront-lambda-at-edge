@@ -1,14 +1,14 @@
-# Serverless Thumbnail Creator
+# S3 Static Site - CloudFront with Lambda@Edge
 
-Lets say, we have to create thumbnails, profile picture for the images uploaded by users. We can use S3 Event notification along with lambda function to do it.
+Lets say, we have a static site front eded with Cloudfront and we want to use Lambda@Edge to change or update custom headers.
 
-![AWS Serverless Thumbnail Creator](images/Miztiik-Serverless-Image-Processor.png)
+![CloudFront Lambda@Edge](images/cloudfront-events-that-trigger-lambda-functions.png)
 
 #### Follow this article in [Youtube](https://youtube.com/c/valaxytechnologies)
 
-0. ### Prerequisites
+0. ## Prerequisites
 
-- AWS CLI pre-configured
+    - AWS CLI pre-configured
 
 1. ## Clone the repository
 
@@ -40,10 +40,14 @@ Lets say, we have to create thumbnails, profile picture for the images uploaded 
     We will use the `deploy.sh` in the `helper_scripts` directory to deploy our [AWS SAM](https://github.com/awslabs/serverless-application-model) template
 
     ```bash
-    chmod +x ./helper_scripts/deploy*.sh
+    chmod +x ./helper_scripts/deploy.sh
     ./helper_scripts/deploy.sh
     ```
   
+1. ## Upload the HTML files
+
+    Copy all the files in the `html` directory to the root of your S3 Bucket(`cloudfront-lambda-at-edge-001-hostbucket`) created by the stack.
+
 1. ## Test Event Processor
 
     Upload an object to the `Source S3 Bucket` created by the stack(_The bucket name should be something like `serverless-thumbnails-creator-srceventbucket-zwpgvaxxb3qh`_). You will be able to see the output in the `Destination S3 Bucket`(_In your account `*tgtbucket`_) three directories with resized images. In the lambda logs you will see the following output

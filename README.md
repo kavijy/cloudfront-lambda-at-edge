@@ -18,7 +18,7 @@ Lets say, we have a static site front eded with Cloudfront and we want to use La
 
 1. ## Customize the deployment
 
-    In the `serverless-thumbnails-creator` directory, Edit the `./helper_scripts/deploy.sh` to update your environment variables.
+    In the `cloudfront-lambda-at-edge` directory, Edit the `./helper_scripts/deploy.sh` to update your environment variables.
 
     **You will have to create an S3 bucket in your account and update the `BUCKET_NAME` in the below section**
   
@@ -48,27 +48,11 @@ Lets say, we have a static site front eded with Cloudfront and we want to use La
 
     Copy all the files in the `html` directory to the root of your S3 Bucket(`cloudfront-lambda-at-edge-001-hostbucket`) created by the stack.
 
-1. ## Test Event Processor
+1. ## Verify the deployment
 
-    Upload an object to the `Source S3 Bucket` created by the stack(_The bucket name should be something like `serverless-thumbnails-creator-srceventbucket-zwpgvaxxb3qh`_). You will be able to see the output in the `Destination S3 Bucket`(_In your account `*tgtbucket`_) three directories with resized images. In the lambda logs you will see the following output
+    Open the cloudfront url in the browser and check out the developer settings(F12 in chrome). As shown in the screenshot below, there will be a header `Custom-Lambda-Headers: Mystique-Added`, You can add any header for security.
 
-    ```json
-    {
-      "status": "True",
-      "TotalItems": {
-        "Received": 1,
-        "Processed": 1
-      },
-      "Items": [
-        {
-          "time": "2019-05-09T18:02:24.534Z",
-          "object_owner": "AWS:AIDAUR7KWXJQLWZZ56LRA",
-          "bucket_name": "serverless-thumbnails-creator-srceventbucket-zwpgvaxxb3qh",
-          "key": "wt-cloudtrail-100.png"
-        }
-      ]
-    }
-    ```
+    ![CloudFront Lambda@Edge](images/custom-lambda-headers-miztiik.png)
 
 1. ## Troubleshooting: Lambda@Edge Logs
 
@@ -84,6 +68,23 @@ Lets say, we have a static site front eded with Cloudfront and we want to use La
           done
       done
     ```
+
+### CleanUp
+
+  If you want to destroy all the resources created by the stack, First empty the `S3 Bucket` of all the files that had been copied over. Execute the below command to delete the stack, or _you can delete the stack from console as well_
+
+  ```bash
+  # Delete the CF Stack
+  ./helper_scripts/deploy.sh nuke
+
+  # Delete the Lambda Log Groups, since these are edge functions, the logs can be in any of the CF distribution regions
+  lg_name="/aws/lambda/us-east-1.cloudfront-lambda-at-edge-001-Mystique"
+  for region in $(aws --output text  ec2 describe-regions | cut -f 3)
+  do  
+      echo ${region}
+      aws logs delete-log-group --log-group-name "${lg_name}" --region ${region}
+  done
+  ```
 
 ### Contact Us
 

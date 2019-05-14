@@ -46,7 +46,7 @@ Lets say, we have a S3 static site with Cloudfront in the front for caching. We 
   
 1. ## Upload the HTML files
 
-    Copy all the files in the `html` directory to the root of your S3 Bucket(`cloudfront-lambda-at-edge-001-hostbucket`) created by the stack.
+    Copy all the files in the `html` directory to the root of your S3 Bucket(`cloudfront-lambda-at-edge-001-hostbucket-1j2jr5bi8etc8`) created by the stack.
 
 1. ## Verify the deployment
 

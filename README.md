@@ -1,6 +1,6 @@
 # S3 Static Site - CloudFront with Lambda@Edge
 
-Lets say, we have a static site front eded with Cloudfront and we want to use Lambda@Edge to change or update custom headers.
+Lets say, we have a S3 static site with Cloudfront in the front for caching. We want to use Lambda@Edge to change or update custom headers. You can use the same pattern to rewrite URLs/redirect traffic, A/B Testing etc.,
 
 ![CloudFront Lambda@Edge](images/cloudfront-events-that-trigger-lambda-functions.png)
 

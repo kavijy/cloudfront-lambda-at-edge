@@ -33,6 +33,7 @@ Resources:
     Type: AWS::CloudFront::Distribution
     Properties:
       DistributionConfig:
+        Comment: CDN for S3-backed website
         DefaultCacheBehavior:
           Compress: true
           ForwardedValues:
